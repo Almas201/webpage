@@ -1,0 +1,67 @@
+body{
+    background-image: url("https://www.kstu.kz/wp-content/uploads/2020/06/5-1.jpg");
+    background-size: 140%;
+}
+.definition{
+    font-size: 25px;
+}
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 20px;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 45%;
+    bottom: 60%;
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color: rgb(62, 142, 65);
+}
+.assistent-btn{
+    background-color: #04AA6D;
+    color: white;
+    padding: 19px;
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 45%;
+    bottom: 50%;
+}
+.assistent-btn:hover, .dropbtn:focus {
+    background-color: rgb(62, 142, 65);
+}
+
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    left: 38%;
+    bottom: 30%;
+    min-width: 350px;
+    background-color: #f1f1f1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 15px 150px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown a:hover {background-color: #ddd;}
+.copyright-text{
+    font-size: 18px;
+    position: absolute;
+    bottom: 1%;
+    left: 52%;
+    margin-left: -18%;
+}
+.definition{
+    position: absolute;
+    bottom: 75%;
+    left:55%;
+    margin-left: -35%;
+}
+
+.show {display: block;}

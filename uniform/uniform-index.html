@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Равномерное распределение</title>
+    <!-- Check bootsrap -->
+    <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="uniform-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" defer></script>
+    <script src="uniform-main.js" defer></script>
+</head>
+<body onload="checkCookieIntro()" id="uniform-body">
+<h1 class="uniform-desc-step">Равномерное распределение</h1>
+<div class="chart-container">
+    <canvas class="chartbox" id="chart" width="400" height="250"></canvas>
+</div>
+<legend>Параметры</legend>
+    <div class="param">
+        <input type="text" name="name" id="idAA" onfocus="this.value=''" value="Введите значения a" />
+        <input type="text" name="name" id="idBB" onfocus="this.value=''" value="Введите значения b"/>
+    </div>
+    <div class="show1">
+        <a href="#" id="btnDraw" onclick="uniform()" class="btnShow">Показать</a>
+    </div>
+    <div class="reset">
+        <a href="#" id="refreshBtn" onclick="window.location.reload()" class="resetBtn">Сбросить</a>
+    </div>
+    <div class="back">
+        <a href="../index.html" class="backBtn">&laquo; Назад</a>
+    </div>
+<!-- Check boostrap -->
+<div class="btnImg">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Узнать подробнее</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Add image inside the body of modal -->
+            <div class="modal-body">
+                <img id="image" src="img/uniform-formule.png" alt="Click on button" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Adding scripts to use bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function setCookie(c_name,value,exdays) {
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+        document.cookie=c_name + "=" + c_value;
+    }
+    function getCookie(c_name) {
+        var c_value = document.cookie;
+        var c_start = c_value.indexOf(" " + c_name + "=");
+        if (c_start === -1) {
+            c_start = c_value.indexOf(c_name + "=");
+        }
+        if (c_start === -1) {
+            c_value = null;
+        }
+        else {
+            c_start = c_value.indexOf("=", c_start) + 1;
+            var c_end = c_value.indexOf(";", c_start);
+            if (c_end === -1) {
+                c_end = c_value.length;
+            }
+            c_value = unescape(c_value.substring(c_start,c_end));
+        }
+        return c_value;
+    }
+    function checkCookieIntro(){
+        var cookie=getCookie("UniformPage");
+        if(cookie === null || cookie === ""){
+            setCookie("UniformPage","101",90);
+            runIntroJs();
+        }
+    }
+</script>
+<script type="text/javascript">
+    function runIntroJs() {
+        var introguide = introJs();
+        $(function () {
+            introguide.setOptions({
+                steps: [{
+                    element: document.querySelector('.uniform-desc-step'),
+                    intro:"Вас приветствует страница <strong>Равномерного распределения</strong>!"
+                },
+                    {
+                        element: document.querySelector('.param'),
+                        intro: 'Здесь, у вас доступные параметры!',
+                        position: 'bottom',
+                        onchange: function () {
+
+                        },
+                        onbeforechange: function () {
+
+                        }
+                    },
+                    {
+                        element: document.querySelector('.btnShow'),
+                        intro: "При нажатии на кнопку, вычисленные данные визуализируется!",
+                        onchange: function () {
+
+                        },
+                        onbeforechange: function () {
+
+                        }
+                    },
+                    {
+                        element: document.querySelector('.chartbox'),
+                        intro: 'Интерфейс, где будет показана визуализация!',
+                        position: 'bottom',
+                        onchange: function () {
+
+                        },
+                        onbeforechange: function () {
+
+                        }
+                    },
+                    {
+                        element: document.querySelector('.btnImg'),
+                        intro: 'При нажатии на кнопку, вы узнаете подробнее о <strong>Равномерном распределении</strong>!',
+                        position: 'bottom',
+                        onchange: function () {
+
+                        },
+                        onbeforechange: function () {
+
+                        }
+                    },
+                    {
+                        element: document.querySelector('.resetBtn'),
+                        intro: 'При нажатии на кнопку, вы сбрасываете весь процесс! ',
+                        position: 'bottom',
+                        onchange: function () {
+
+                        },
+                        onbeforechange: function () {
+
+                        }
+                    },
+                    {
+                        element: document.querySelector('.backBtn'),
+                        intro: 'При нажатии на кнопку, вы переходите в главное меню!',
+                        position: 'bottom',
+                        onchange: function () {
+
+                        },
+                        onbeforechange: function () {
+
+                        }
+                    },
+                    {
+                        intro: "Удачи!"
+                    }
+                ]
+            });
+        });
+        function createStepEvents(guideObject, eventList) {
+            _.each(eventList, function (event) {
+                guideObject[event](function () {
+                    var steps = this._options.steps,
+                        currentStep = this._currentStep;
+                    if (_.isFunction(steps[currentStep][event])) {
+                        steps[currentStep][event]();
+                    }
+                });
+            }, this);
+        }
+        createStepEvents(introguide, ['onchange', 'onbeforechange']);
+        introguide.start();
+    }
+</script>
+</body>
+</html>

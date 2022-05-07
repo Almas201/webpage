@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Главная</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+  <script src="main.js"></script>
+</head>
+<body onload="checkCookieIntro()">
+    <p class="definition">При нажатии на кнопку <strong>Выбрать тип</strong>, вам будет предложено варианты распределения</p>
+    <div class="dropdown">
+      <button onclick="myFunction()" class="dropbtn" id="listbtn">Выбрать тип</button>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="uniform/uniform-index.html" class="uniform-step">Равномерное</a>
+        <a href="normal/normal-index.html" class="normal-step">Нормальное</a>
+        <a href="linear/linear-index.html" class="linear-step">Линейное</a>
+        <a href="exponential/exponential-index.html" class="exponential-step">Экспоненициальное</a>
+      </div>
+    </div>
+    <p class="copyright-text"> &copy Турганбаев Алмас, Satbayev Univeristy, Дипломная работа 2022г.</p>
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function setCookie(c_name,value,exdays) {
+            var exdate=new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+            document.cookie=c_name + "=" + c_value;
+        }
+        function getCookie(c_name) {
+            var c_value = document.cookie;
+            var c_start = c_value.indexOf(" " + c_name + "=");
+            if (c_start === -1) {
+                c_start = c_value.indexOf(c_name + "=");
+            }
+            if (c_start === -1) {
+                c_value = null;
+            }
+            else {
+                c_start = c_value.indexOf("=", c_start) + 1;
+                var c_end = c_value.indexOf(";", c_start);
+                if (c_end === -1) {
+                    c_end = c_value.length;
+                }
+                c_value = unescape(c_value.substring(c_start,c_end));
+            }
+            return c_value;
+        }
+        function checkCookieIntro(){
+            var cookie=getCookie("FirstPage");
+            if(cookie === null || cookie === ""){
+                setCookie("FirstPage","100",90);
+                runIntroJs();
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function runIntroJs() {
+            var introguide = introJs();
+            $(function () {
+                introguide.setOptions({
+                    steps: [
+                        {
+                        intro: "Вас приветствует путиводитель <strong>Алмаса<strong>!"
+                        },
+                        {
+                            element: document.querySelector('.dropbtn'),
+                            intro: 'При нажатии на эту кнопку, будет отображено список кнопок для перехода на другие страницы!',
+                            position: 'bottom',
+                            onchange: function () {
+
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        },
+                        {
+                            intro: "Нажимаем на кнопку!",
+                            onchange: function () {
+                                document.getElementById('listbtn').click();
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        },
+                        {
+                            element: document.querySelector('.uniform-step'),
+                            intro: 'При нажатии на эту кнопку, вы переходите на страницу <strong>Равномерного распределения</strong>',
+                            position: 'bottom',
+                            onchange: function () {
+
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        },
+                        {
+                            element: document.querySelector('.normal-step'),
+                            intro: 'При нажатии на эту кнопку, вы переходите на страницу <strong>Равномерного распределения</strong>',
+                            position: 'bottom',
+                            onchange: function () {
+
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        },
+                        {
+                            element: document.querySelector('.linear-step'),
+                            intro: 'При нажатии на эту кнопку, вы переходите на страницу <strong>Равномерного распределения</strong>',
+                            position: 'bottom',
+                            onchange: function () {
+
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        },
+                        {
+                            element: document.querySelector('.exponential-step'),
+                            intro: 'При нажатии на эту кнопку, вы переходите на страницу <strong>Равномерного распределения</strong>',
+                            position: 'bottom',
+                            onchange: function () {
+
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        },
+                        {
+                            intro: "Удачи!",
+                            onchange: function () {
+                                document.getElementById('listbtn').click();
+                            },
+                            onbeforechange: function () {
+
+                            }
+                        }
+                    ]
+                });
+            });
+            function createStepEvents(guideObject, eventList) {
+                _.each(eventList, function (event) {
+                    guideObject[event](function () {
+                        var steps = this._options.steps,
+                            currentStep = this._currentStep;
+                        if (_.isFunction(steps[currentStep][event])) {
+                            steps[currentStep][event]();
+                        }
+                    });
+                }, this);
+            }
+            createStepEvents(introguide, ['onchange', 'onbeforechange']);
+            introguide.start();
+        }
+    </script>
+</body>
+</html>
+
