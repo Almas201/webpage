@@ -9,7 +9,8 @@ body{
     color: #111;
 }
 h1{
-    text-align: center;
+    position: fixed;
+    right: 33%;
     margin: 1.25rem 0 0.25rem 0;
 }
 canvas{
